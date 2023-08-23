@@ -4,15 +4,20 @@ import dts from 'rollup-plugin-dts';
 
 const input = {
   index: 'src/index.ts',
-  refetchInvervalExchange: 'src/refetchIntervalExchange.ts'
+  'refetch-inverval-exchange': 'src/refetch-interval-exchange.ts',
 };
 
 export default [{
   input,
-  output: {
+  output: [{
     dir: './dist',
-    entryFileNames: '[name].js'
-  },
+    entryFileNames: '[name].mjs',
+    format: 'esm',
+  }, {
+    dir: './dist',
+    entryFileNames: '[name].js',
+    format: 'cjs',
+  }],
   plugins: [resolve(), typescript()],
 }, {
   input,

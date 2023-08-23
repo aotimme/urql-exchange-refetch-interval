@@ -1,1 +1,1 @@
-export { refetchIntervalExchange } from './refetchIntervalExchange';
+export { refetchIntervalExchange } from './refetch-interval-exchange';
