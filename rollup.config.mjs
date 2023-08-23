@@ -4,7 +4,7 @@ import dts from 'rollup-plugin-dts';
 
 const input = {
   index: 'src/index.ts',
-  'refetch-inverval-exchange': 'src/refetch-interval-exchange.ts',
+  'refetch-interval-exchange': 'src/refetch-interval-exchange.ts',
 };
 
 export default [{
