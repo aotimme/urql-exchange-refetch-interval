@@ -1,6 +1,6 @@
 {
   "name": "@aotimme/urql-exchange-refetch-interval",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An exchange that allows refetching queries at a specified interval",
   "sideEffects": false,
   "homepage": "https://github.com/aotimme/urql-exchange-refetch-interval",
@@ -19,15 +19,15 @@
     "react",
     "refetch"
   ],
-  "main": "dist/urql-exchange-refocus",
-  "module": "dist/urql-exchange-refetch-interval.mjs",
-  "types": "dist/urql-exchange-refetch-interval.d.ts",
+  "main": "dist/refetch-interval-exchange",
+  "module": "dist/refetch-interval-exchange.mjs",
+  "types": "dist/refetch-interval-exchange.d.ts",
   "source": "src/index.ts",
   "exports": {
     ".": {
-      "types": "./dist/urql-exchange-refetch-interval.d.ts",
-      "import": "./dist/urql-exchange-refetch-interval.mjs",
-      "require": "./dist/urql-exchange-refetch-interval.js",
+      "types": "./dist/refetch-interval-exchange.d.ts",
+      "import": "./dist/refetch-interval-exchange.mjs",
+      "require": "./dist/refetch-interval-exchange.js",
       "source": "./src/index.ts"
     },
     "./package.json": "./package.json"
