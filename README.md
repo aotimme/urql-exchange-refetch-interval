@@ -25,3 +25,22 @@ const client = createClient({
   exchanges: [refetchIntervalExchange({refetchInterval: 30000}), cacheExchange, fetchExchange],
 });
 ```
+
+You can also specify the `refetchInterval` as a function taking in an urql `Operation`:
+
+```js
+import { createClient, cacheExchange, fetchExchange } from 'urql';
+import { refetchIntervalExchange } from '@aotimme/urql-exchange-refetch-interval';
+
+const refetchInterval = (op) => {
+  if (op.context.requestPolicy === "cache-only") {
+    return false;
+  }
+  return 30000;
+}
+
+const client = createClient({
+  url: 'http://localhost:3000/graphql',
+  exchanges: [refetchIntervalExchange({refetchInterval}), cacheExchange, fetchExchange],
+});
+```

@@ -10,7 +10,7 @@ export interface Options {
    * 
    * @defaultValue `300_000` - 5 min
    */
-  refetchInterval?: number;
+  refetchInterval?: boolean | number | ((op: Operation) => number | boolean);
 }
 
 interface OperationAndTimeoutId {
@@ -34,8 +34,16 @@ interface OperationAndTimeoutId {
 export const refetchIntervalExchange = (options: Options): Exchange => {
   return ({ client, forward }) => {
     const operations = new Map<number, OperationAndTimeoutId>();
-    const refetchInterval = options.refetchInterval ?? DEFAULT_REFETCH_INTERVAL;
 
+    const getRefetchInterval = (op: Operation): number => {
+      const refetchInterval = typeof options.refetchInterval === "function" ? options.refetchInterval(op) : options.refetchInterval;
+      if (typeof refetchInterval === "undefined") {
+        return DEFAULT_REFETCH_INTERVAL;
+      } else if (typeof refetchInterval === "boolean") {
+        return refetchInterval ? DEFAULT_REFETCH_INTERVAL : 0;
+      }
+      return refetchInterval;
+    }
 
     return (ops$) => {
       if (typeof window === 'undefined') {
@@ -50,14 +58,17 @@ export const refetchIntervalExchange = (options: Options): Exchange => {
             clearTimeout(currentOperationAndTimeout.timeoutId);
             operations.delete(op.key);
           }
-          const timeoutId = setTimeout(() => {
-            const requestOperation = client.createRequestOperation('query', op, {
-              ...op.context,
-              requestPolicy: 'cache-and-network',
-            });
-            client.reexecuteOperation(requestOperation);
-          }, refetchInterval);
-          operations.set(op.key, {operation: op, timeoutId});
+          const refetchInterval = getRefetchInterval(op);
+          if (refetchInterval > 0) {
+            const timeoutId = setTimeout(() => {
+              const requestOperation = client.createRequestOperation('query', op, {
+                ...op.context,
+                requestPolicy: 'cache-and-network',
+              });
+              client.reexecuteOperation(requestOperation);
+            }, refetchInterval);
+            operations.set(op.key, {operation: op, timeoutId});
+          }
         }
 
         if (op.kind === 'teardown' && currentOperationAndTimeout) {
