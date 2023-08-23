@@ -43,8 +43,7 @@
     "clean": "rimraf dist",
     "check": "tsc --noEmit",
     "lint": "eslint --ext=js,jsx,ts,tsx .",
-    "build": "rollup -c rollup.config.mjs",
-    "prepublishOnly": "run-s clean build"
+    "build": "rollup -c rollup.config.mjs"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.2.1",
