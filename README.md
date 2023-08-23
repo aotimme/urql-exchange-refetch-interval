@@ -12,7 +12,9 @@ yarn add @aotimme/urql-exchange-refetch-interval
 npm install --save @aotimme/urql-exchange-refetch-interval
 ```
 
-Then add it to your `Client`, in front of any asynchronous exchanges, like the `fetchExchange`:
+Then add it to your `Client`.
+
+You will likely want to put it before the `cacheExchange` since that can filter out operations that you will want to refetch. And you will also want it before any asynchronous exchanges, like the `fetchExchange`.
 
 ```js
 import { createClient, cacheExchange, fetchExchange } from 'urql';
@@ -20,6 +22,6 @@ import { refetchIntervalExchange } from '@aotimme/urql-exchange-refetch-interval
 
 const client = createClient({
   url: 'http://localhost:3000/graphql',
-  exchanges: [cacheExchange, refetchIntervalExchange({refetchInterval: 30000}), fetchExchange],
+  exchanges: [refetchIntervalExchange({refetchInterval: 30000}), cacheExchange, fetchExchange],
 });
 ```

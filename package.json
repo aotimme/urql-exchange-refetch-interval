@@ -1,6 +1,6 @@
 {
   "name": "@aotimme/urql-exchange-refetch-interval",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "An exchange that allows refetching queries at a specified interval",
   "sideEffects": false,
   "homepage": "https://github.com/aotimme/urql-exchange-refetch-interval",

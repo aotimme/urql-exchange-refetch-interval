@@ -51,7 +51,10 @@ export const refetchIntervalExchange = (options: Options): Exchange => {
             operations.delete(op.key);
           }
           const timeoutId = setTimeout(() => {
-            const requestOperation = client.createRequestOperation('query', op, op.context);
+            const requestOperation = client.createRequestOperation('query', op, {
+              ...op.context,
+              requestPolicy: 'cache-and-network',
+            });
             client.reexecuteOperation(requestOperation);
           }, refetchInterval);
           operations.set(op.key, {operation: op, timeoutId});
