@@ -1,0 +1,67 @@
+{
+  "name": "@aotimme/urql-exchange-refetch-interval",
+  "version": "0.0.1",
+  "description": "An exchange that allows refetching queries at a specified interval",
+  "sideEffects": false,
+  "homepage": "https://github.com/aotimme/urql-exchange-refetch-interval",
+  "bugs": "https://github.com/aotimme/urql-exchange-refetch-interval/issues",
+  "license": "MIT",
+  "author": "aotimme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aotimme/urql-exchange-refetch-interval.git"
+  },
+  "keywords": [
+    "urql",
+    "graphql client",
+    "graphql",
+    "exchanges",
+    "react",
+    "refetch"
+  ],
+  "main": "dist/urql-exchange-refocus",
+  "module": "dist/urql-exchange-refetch-interval.mjs",
+  "types": "dist/urql-exchange-refetch-interval.d.ts",
+  "source": "src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/urql-exchange-refetch-interval.d.ts",
+      "import": "./dist/urql-exchange-refetch-interval.mjs",
+      "require": "./dist/urql-exchange-refetch-interval.js",
+      "source": "./src/index.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "LICENSE",
+    "CHANGELOG.md",
+    "README.md",
+    "dist/"
+  ],
+  "scripts": {
+    "test": "vitest --config ../../vitest.config.ts",
+    "clean": "rimraf dist",
+    "check": "tsc --noEmit",
+    "lint": "eslint --ext=js,jsx,ts,tsx .",
+    "build": "rollup -c rollup.config.mjs",
+    "prepublishOnly": "run-s clean build"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.2.1",
+    "@rollup/plugin-typescript": "^11.1.2",
+    "@types/react": "^17.0.4",
+    "graphql": "^16.0.0",
+    "rollup": "^3.28.1",
+    "rollup-plugin-dts": "^6.0.0",
+    "tslib": "^2.6.2",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "@urql/core": ">=4.1.0",
+    "wonka": "^6.3.2"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}
